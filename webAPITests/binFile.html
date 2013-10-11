@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>rutracker.org</title>
+<base href="http://rutracker.org/forum/">
+<link rel="stylesheet" href="http://static.rutracker.org/templates/default/css/main.css?v=71" type="text/css">
+
+<link rel="shortcut icon" href="http://static.rutracker.org/favicon.ico" type="image/x-icon">
+
+<link rel="search" type="application/opensearchdescription+xml" title="Поиск на rutracker.org" href="http://static.rutracker.org/opensearch.xml">
+
+<script type="text/javascript" src="http://static.rutracker.org/js/jquery.pack.js?v=33"></script>
+
+<script type="text/javascript">
+window.BB = {};
+window.encURL = encodeURIComponent;
+</script>
+<script type="text/javascript" src="http://static.rutracker.org/js/main.js?v=33"></script>
+
+<script type="text/javascript">
+function log (){};
+</script>
+
+
+<script type="text/javascript">
+var BB_ROOT       = "./";
+var cookieDomain  = ".rutracker.org";
+var cookiePath    = "/forum/";
+var cookieSecure  = 0;
+var cookiePrefix  = "bb_";
+var LOGGED_IN     = 0;
+var InfoWinParams = 'width=780,height=510,resizable=yes';
+
+var user = {
+	opt_js: {},
+
+	set: function(opt, val, days, reload) {
+		this.opt_js[opt] = val;
+		setCookie('opt_js', $.toJSON(this.opt_js), days);
+		if (reload) {
+			window.location.reload();
+		}
+	}
+}
+
+$(function(){
+	$('a.dl-stub').each(function(){
+		var $a = $(this);
+		var href = $a.attr('href');
+		var t_id = href.slice( href.lastIndexOf('=')+1 );
+		var event = ($.browser.opera) ? 'mouseover' : 'mousedown';
+		$a.bind(event, function(){
+			setCookie('bb_dl', t_id, 'SESSION')
+		});
+		$a.click(function(){
+			$('#dl-form').attr('action', href);
+			$('#dl-form').submit();
+			return false;
+		});
+	});
+		});
+
+var ajax = new Ajax('http://login.rutracker.org/forum/ajax.php', 'POST', 'json');
+
+function getElText (e)
+{
+	var t = '';
+	if (e.textContent !== undefined) {
+		t = e.textContent;
+	}
+	else if (e.innerText !== undefined) {
+		t = e.innerText;
+	}
+	else {
+		t = jQuery(e).text();
+	}
+	return t;
+}
+function escHTML (txt) {
+	return txt.replace(/</g, '&lt;');
+}
+function cfm (txt)
+{
+	return window.confirm(txt);
+}
+function post2url (url, params) {
+	params = params || {};
+	params['form_token'] = '';
+	var f = document.createElement('form');
+	f.setAttribute('action', url);
+	f.setAttribute('method', 'post');
+	f.setAttribute('target', params['target'] || '_self');
+	for (var k in params) {
+		var h = document.createElement('input');
+		h.setAttribute('type', 'hidden');
+		h.setAttribute('name', k);
+		h.setAttribute('value', params[k]);
+		f.appendChild(h);
+	}
+	document.body.appendChild(f);
+	f.submit();
+	return false;
+}
+</script>
+
+<!--[if lte IE 6]><script type="text/javascript">
+$(ie6_make_clickable_labels);
+
+$(function(){
+	$('div.menu-sub').prepend('<iframe class="ie-fix-select-overlap"></iframe>'); // iframe for IE select box z-index issue
+	Menu.iframeFix = true;
+});
+</script><![endif]-->
+
+<!--[if gte IE 7]><style type="text/css">
+input[type="checkbox"] { margin-bottom: -1px; }
+</style><![endif]-->
+
+<!--[if lte IE 6]><style type="text/css">
+.forumline th { height: 24px; padding: 2px 4px; }
+.menu-sub iframe.ie-fix-select-overlap { display: none; display/**/: block; position: absolute; z-index: -1; filter: mask(); }
+</style><![endif]-->
+
+<!--[if IE]><style type="text/css">
+.post-hr { margin: 2px auto; }
+.fieldsets div > p { margin-bottom: 0; }
+</style><![endif]-->
+
+<style type="text/css">
+img.t-spacer { width: 142px; margin-top: -1px; }
+.hidden, .menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
+#adriver-240x120 { width: 240px; height: 120px; padding-bottom: 2px; margin-right: -2px; }
+#adriver-468x60, #pr-468x60  { width: 468px; height: 60px; }
+#latest_news table { width: 100%; }
+#sidebar1_wrap { margin-top: -4px; }
+/* temp */
+
+.quick_reply_box  { width: 800px; }
+
+/* temp end */
+</style>
+
+</head>
+
+<body>
+
+
+
+<!--cse-->
+<script type="text/javascript">
+BB.hl_quick_search_err = function(){
+	$('#search-text').addClass('hl-err-block').focus();
+};
+
+$(function(){
+	$('#cse-search-btn, #cse-search-btn-top').click(function(){
+		var text_match_input_id = $(this).attr('href');
+		var text_match = $('#'+text_match_input_id).val();
+		if (text_match == '') {
+			$('#'+text_match_input_id).addClass('hl-err-block').focus();
+			return false;
+		}
+		$('#cse-text-match').val( text_match );
+		$('#cse-submit-btn').click();
+		return false;
+	});
+
+	$('#search-text').on('mousedown keypress', function(){
+		if ( $(this).hasClass('hl-err-block') ) {
+			$(this).removeClass('hl-err-block');
+		}
+	});
+
+	$('#search-menu').on('change', function(){
+		$('#quick-search').submit();
+	});
+
+	$('#quick-search').submit(function(){
+		var $search_form = $(this);
+		var search_type  = $('#search-menu').val();
+		var search_data  = $('#search-menu option:selected').data();
+		var search_query = $.trim( $('#search-text').val() );
+		var url_params   = [];
+
+		if (search_query == '' && search_type != 'search-tr') {
+			BB.hl_quick_search_err();
+			return false;
+		}
+		search_query_enc = encURL(search_query);
+
+		switch (search_type)
+		{
+			case 'search-tr':
+			case 'search-all':
+				var search_action = search_data.action;
+				if (search_data.forum_id != null) {
+					url_params.push( 'f='+ search_data.forum_id );
+				}
+				if (search_query_enc != '') {
+					url_params.push( 'nm='+ search_query_enc );
+				}
+				if (url_params.length) {
+					search_action += '?'+ url_params.join('&');
+				}
+				$search_form.attr({ action: search_action });
+				break;
+
+			case 'cse':
+				$('#cse-search-btn-top').click();
+				return false;
+				break;
+
+			case 'wiki':
+				var wiki_url = 'http://wiki.rutracker.org/'+ encURL('Служебная:Search') +'?fulltext=1&search='+ search_query_enc;
+				post2url(wiki_url, {target: '_blank'});
+				return false;
+				break;
+
+			case 'hash':
+				if ( /^[a-fA-F0-9]{40}$/.test(search_query) ) {
+					window.location.href = 'viewtopic.php?h='+ search_query;
+				}
+				else {
+					BB.hl_quick_search_err();
+				}
+				return false;
+				break;
+		}
+		$('#quick-search input[type="submit"]').prop({disabled: true}).css({color: '#585858'});
+	});
+});
+</script>
+<div id="cse-form-holder" style="display: none;">
+<form action="search_cse.php" id="cse-search-box">
+	<input type="hidden" name="cx" value="014434608714260776013:ggcq1kovlga" />
+	<input type="hidden" name="cof" value="FORID:9" />
+	<input type="hidden" name="ie" value="windows-1251" />
+	<input type="text" name="q" size="60" value="" id="cse-text-match" />
+	<input type="submit" name="sa" value="Поиск в Google" id="cse-submit-btn" />
+</form>
+</div>
+<!--/cse-->
+
+<form method="post" action="" id="dl-form" style="display: none;"></form>
+
+
+
+<div id="body_container">
+
+<!--************************************************************************-->
+<!--=COMMON_HEADER==========================================================-->
+
+<script type="text/javascript">
+if (top != self) {
+	allowed_self = /^(translate\.googleusercontent\.com)$/;
+	if (!self.location.hostname.match(allowed_self)) {
+		$(function(){
+			$('body').html('<center><h1><br /><br />Похоже вас пытаются обмануть<br />'+ self.location.hostname +' in frame</h1></center>');
+		});
+	}
+}
+// var clickaider_cid = "2b0f2b47-11885";
+// var clickaider_track_links = "marked";
+
+var begun_iframe_domain = '195.82.146.52';
+var begun_blocks_cnt    = 0;
+
+function begun_init_block (params)
+{
+	// один блок на страницу
+	if (begun_blocks_cnt > 0) {
+		return;
+	}
+	var iframe_file = 'iframe-begun-user-str-2.html';
+	// приведение location к адресу доступному гостям (начальная страница топика)
+	var loc = (params.location_href != null) ? params.location_href : '';
+	if (loc.indexOf('&') != -1) {
+		loc = loc.substring(0, loc.indexOf('&'));
+	}
+	var append_char = (loc.indexOf('?') == -1) ? '?' : '&';
+	var fix = (params.fix_style != null) ? params.fix_style : '';
+	var begun_query = [
+		'bid='+ params.begun_block_id,
+		'bgc='+ params.bg_color,
+		'ref='+ encodeURIComponent(document.referrer),
+		'loc='+ encodeURIComponent(loc + append_char +'query='),
+		'fix='+ encodeURIComponent(fix),
+		'rnd='+ Math.random()
+	];
+	var frame_width  = params.frame_width  || '100%';
+	var frame_height = params.frame_height || 17;
+	$(function(){
+		$('#'+params.container_id).html('<iframe src="http://'+ begun_iframe_domain +'/'+ iframe_file +'?'+ begun_query.join('&') +'" frameborder=0 width="'+ frame_width +'" height="'+ frame_height +'" marginwidth=0 marginheight=0 scrolling=no></iframe>');
+	});
+	begun_blocks_cnt++;
+}
+
+$(function(){
+	var rnd = Math.round(Math.random()*1000000000);
+	var ref = document.referrer ? escape(document.referrer) : 'unknown';
+	$('#adriver-240x120').html('<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?sid=85725&sz=login240&target=blank&bt=8&pz=0&tail256='+ ref +'&rnd='+ rnd +'" frameborder=0 vspace=0 hspace=0 width=240 height=120 marginwidth=0 marginheight=0 scrolling=no></iframe>');
+	$('#adriver-468x60').html('<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?sid=85725&sz=login468&target=blank&bt=1&pz=0&tail256='+ ref +'&rnd='+ rnd +'" frameborder=0 vspace=0 hspace=0 width=468 height=60 marginwidth=0 marginheight=0 scrolling=no></iframe>');
+//$('#filepost-guest').html('&nbsp; &middot; &nbsp;<a href="http://filepost.ru/?page=501455" target="_blank" style="color: brown;"><b>Скачать через FilePost и получить CD/DVD по почте</b></a>');
+});
+</script>
+
+<!--page_container-->
+<div id="page_container">
+<a name="top"></a>
+
+<!--page_header-->
+<div id="page_header">
+
+<!--main_nav-->
+<div id="main-nav" style="height: 17px;">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="nowrap">
+			<a href="./index.php"><b>Главная</b></a>&#0183;
+			<a href="tracker.php"><b>Трекер</b></a>&#0183;
+			<a href="search.php"><b>Поиск</b></a>&#0183;
+			<a href="viewtopic.php?t=1045"><b>Правила</b></a>&#0183;
+			<a href="http://wiki.rutracker.org/" target="_blank"><b>FAQ</b></a>&#0183;
+			<a href="groupcp.php"><b>Группы</b></a>&#0183;
+			<a href="info.php?show=copyright_holders" onclick="window.open(this.href, '', InfoWinParams); return false;"><b>Для правообладателей</b></a>
+		</td>
+		<td class="nowrap" align="right">
+			<a href="http://kz.rutracker.org/forum/"><b>KZ</b></a>&#0183;
+			<a href="http://ua.rutracker.org/forum/"><b>UA</b></a>&#0183;
+			<a href="http://by.rutracker.org/forum/"><b>BY</b></a>
+		</td>
+	</tr>
+	</table>
+</div>
+<!--/main-nav-->
+
+<!--logo-->
+<div id="logo">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="padding: 3px 0 2px 6px;">
+			<a href="./index.php"><img src="http://195.82.146.52/logo/03-08/2013.gif" width="320" height="85" alt="logo" /></a>
+		</td>
+		<td width="100%" class="tCenter" style="padding: 0 6px 0 6px;">
+
+
+			
+			<table cellpadding="0" cellspacing="0" class="bCenter" style="padding: 6px 6px 0;">
+
+						<tr>
+				<td>
+<!--
+					<div id="top-bn-1" style="width: 600px; height: 90px; padding: 0 0 3px;"></div>
+					<div class="tCenter bCenter"><iframe src="http://rotator.nivalnetwork.com/index.html?rnd=306872115" frameborder=0 vspace=0 hspace=0 width=600 height=90 marginwidth=0 marginheight=0 scrolling=no></iframe></div>
+-->
+					<div class="tCenter bCenter"><iframe src="http://ad.mail.ru/adi/2191?rnd=306872115" frameborder=0 vspace=0 hspace=0 width=600 height=90 marginwidth=0 marginheight=0 scrolling=no></iframe></div>
+				</td>
+			</tr>
+						</table>
+
+				</td>
+	</tr>
+	</table>
+</div>
+<!--/logo-->
+
+<!--topmenu-->
+<div class="topmenu">
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+	
+		<td class="tCenter pad_2">
+		<a href="profile.php?mode=register"><b>Регистрация</b></a>
+		&nbsp;&#0183;&nbsp;
+		<form method="post" action="http://login.rutracker.org/forum/login.php">
+			<input type="hidden" name="redirect" value="index.php" />			Имя: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
+			Пароль: <input type="password" name="login_password" size="12" tabindex="2" />
+			<label id="ses-short" title="Короткая сессия (автовыход через полчаса неактивности)"><input type="checkbox" name="ses_short" value="1" tabindex="3" onclick="$('#ses-short').css({color: this.checked ? '#0000FF' : '#000000'});" /> Не запоминать</label>&nbsp;
+			<input type="submit" name="login" value="Вход" tabindex="4" />
+		</form>
+		&nbsp;&#0183;&nbsp;
+		<a href="profile.php?mode=sendpassword">Забыли пароль?</a>
+	</td>
+	
+	</tr>
+</table>
+</div><!--/topmenu-->
+
+<noscript>
+	<style type="text/css">
+	.sp-body, .sp-title { display: block; }
+	</style>
+</noscript>
+
+
+<!--breadcrumb-->
+<!--<div id="breadcrumb"></div>-->
+<!--/breadcrumb-->
+
+
+</div>
+<!--/page_header-->
+<!--bnt-->
+
+
+
+
+<!--page_content-->
+<div id="page_content">
+<table cellspacing="0" cellpadding="0" border="0" style="width: 100%;"><tr>
+
+
+<!--main_content-->
+<td id="main_content">
+<div id="main_content_wrap">
+
+
+<!--========================================================================-->
+<!--************************************************************************-->
+
+
+
+<!-- page_header.tpl END -->
+<!-- module_xx.tpl START -->
+
+<script type="text/javascript">
+$(function(){
+	var tab_idx = 100;
+	$('input,select,textarea', '#login-form').not(':hidden').each(function(){
+		$(this).attr({ tabindex: ++tab_idx });
+	});
+});
+</script>
+
+<h1 class="pagetitle">Вход</h1>
+
+<form id="login-form" action="http://login.rutracker.org/forum/login.php" method="post">
+
+<input type="hidden" name="redirect" value="index.php" />
+
+<p class="nav"><a href="./index.php">Список форумов rutracker.org</a></p>
+
+<table class="forumline">
+<tr>
+	<th>Вход</th>
+</tr>
+<tr>
+	<td class="row1">
+
+		<h4 class="tCenter mrg_16">Введите ваше имя и пароль</h4>
+	
+	<div class="mrg_16">
+	<table class="borderless bCenter">
+	<tr>
+		<td width="31%" class="tRight">Имя:</td>
+		<td width="69%"><input type="text" name="login_username" size="25" maxlength="30" value=""  /></td>
+	</tr>
+	<tr>
+		<td class="tRight">Пароль:</td>
+		<td><input type="password" name="login_password" size="25" maxlength="32" value="" /></td>
+	</tr>
+		<tr>
+		<td colspan="2" class="tCenter med nowrap pad_4"><label><input type="checkbox" name="ses_short" value="1"  /> Короткая сессия (автовыход через полчаса неактивности)</label></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="tCenter pad_8"><input type="submit" name="login" class="bold long" value="Вход" /></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="tCenter med">В вашем браузере должны быть включены куки и JavaScript!</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="tCenter"><a href="profile.php?mode=sendpassword" class="med">Забыли пароль?</a></td>
+	</tr>
+	</table>
+	</div>
+
+	</td>
+</tr>
+</table>
+
+</form>
+
+
+	</div><!--/main_content_wrap-->
+	</td><!--/main_content-->
+
+	</tr></table>
+	</div>
+	<!--/page_content-->
+
+	<!--page_footer-->
+	<div id="page_footer">
+
+<div id="bn-bot-wrap">
+
+	<div class="tCenter mrg_12">
+	<table class="bCenter" width="850"><tr>
+	<td><a target="_blank" style="color: darkred;" href="http://www.mtsunlim.ru"><b>Междугородние звонки по 1р/мин | Безлимитные тарифы для Москвы и Области за 40 руб/день</b></a></td>
+	</tr></table>
+	</div>
+
+<div style="margin: 6px 10px; padding: 8px; border: 1px solid #B7C0C5;">
+		<table style="margin: 6px auto;"><tr>
+		<td valign="top"></td>
+				<td>&nbsp;</td>
+		<td valign="top"><div id="adriver-468x60"></div></td>
+			</tr></table>
+		<div id="mg-informers" style="width: 98%; margin: 6px auto 0; text-align: center;"></div>
+<script type="text/javascript">
+$(function(){
+	$('#mg-informers').html('<iframe src="http://mg.dt00.net/public/informers/torrents.2ru.html?rnd='+ Math.round(Math.random()*1000000) +'" frameborder=0 vspace=0 hspace=0 width="100%" height=160 marginwidth=0 marginheight=0 scrolling=no></iframe>');
+});
+</script></div>
+</div><!--/bn-bot-wrap-->
+
+		
+		<div class="clear"></div>
+
+		<br />
+
+				<div class="med bold tCenter pad_4">
+			<a href="info.php?show=user_agreement" onclick="window.open(this.href, '', InfoWinParams); return false;">Условия использования</a>
+			&nbsp;&middot;&nbsp;
+			<a href="info.php?show=advert" onclick="window.open(this.href, '', InfoWinParams); return false;">Реклама на сайте</a>
+						&nbsp;&middot;&nbsp;
+			<a href="info.php?show=copyright_holders" onclick="window.open(this.href, '', InfoWinParams); return false;">Для правообладателей</a>
+																		&nbsp;&middot;&nbsp;
+			<a href="info.php?show=press" onclick="window.open(this.href, '', InfoWinParams); return false;">Для прессы</a>
+						&nbsp;&middot;&nbsp;
+			<a href="viewtopic.php?t=2234744" target="_blank">Для провайдеров</a>
+		</div>
+		<div class="med bold tCenter pad_4">
+			<a href="http://wiki.rutracker.org" target="_blank">Торрентопедия</a>
+			&nbsp;&middot;&nbsp;
+			<a href="http://wiki.rutracker.org/r.php?id=10004" target="_blank">Кому задать вопрос</a>
+			&nbsp;&middot;&nbsp;
+			<a href="http://rutracker.org/forum/viewtopic.php?t=3949538" target="_blank">Rutracker Magazine</a>
+			&nbsp;&middot;&nbsp;
+			<a href="http://rutracker.org/forum/viewforum.php?f=1538" target="_blank">Авторские раздачи</a>
+			&nbsp;&middot;&nbsp;
+			<a href="http://rutracker.org/forum/viewforum.php?f=489" target="_blank">Новости в сети</a>
+			&nbsp;&middot;&nbsp;
+			<a href="#" onclick="return post2url('torrent.php', {rand_rel: 1});">Случайная раздача</a>
+		</div>
+		<br />
+		
+		
+<table width="99%" cellpadding="0" cellspacing="0" class="bCenter">
+<tr>
+
+	<td width="50%" class="vBottom">
+		<div class="copyright">
+			<p><a href="groupcp.php?g=104792">Администрация</a> &middot; <a href="groupcp.php?g=104787">Модераторы</a> &middot; <a href="groupcp.php?g=104841">Техническая помощь</a></p>
+		</div>
+	</td>
+	<td class="vBottom">
+
+		<table class="bCenter" cellspacing="0" cellpadding="2" border="0" style="padding-top: 4px;">
+	<tr>
+		<td class="vBottom nowrap" style="padding: 0 4px;">
+			<!--LiveInternet counter-->
+			<script type="text/javascript">
+			var LI_title = '';
+			document.write("<a href='http://www.liveinternet.ru/stat/rutracker.org/' "+ "target=_blank><img src='http://counter.yadro.ru/hit?t16.2;r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(LI_title.substring(0,80))+";"+Math.random()+"' alt='' "+"border='0' width='88' height='31'><\/a>");
+			</script>
+			<!--/LiveInternet-->
+
+			<!--rambler-->
+			<a href="http://top100.rambler.ru/cgi-bin/stats_top100.cgi?1467197" target='_blank'><img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-gray2.gif" alt="" width="88" height="31" border="0" /></a>
+			<!-- <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?1467197"></script> -->
+			<script type="text/javascript">
+			new Image().src = "http://counter.rambler.ru/top100.scn?1467197&rn="+Math.random()+"&rf="+escape(document.referrer);
+			</script>
+			<!--/rambler-->
+
+			<!-- SpyLOG MyStat -->
+			<span id="spylog601119"></span>
+			<script type="text/javascript">
+			var spylog = { counter: 601119, image: 5012, next: spylog };
+			$(document).ready(function(){
+				$.ajax({ url: "http://counter.spylog.com/cnt.js", dataType: "script", cache: true, global: false });
+			});
+			</script>
+			<!--/SpyLOG MyStat -->
+		</td>
+	</tr>
+	</table>
+	
+	</td>
+	<td width="50%" class="vBottom tRight">
+		<div class="copyright">
+			<p>&copy; Dreamtorrent Corp. 2005-2013</p>
+		</div>
+	</td>
+
+</tr>
+</table>
+
+	</div>
+	<!--/page_footer-->
+
+	</div>
+	<!--/page_container-->
+
+
+
+
+<div id="ajax-loading"><b>Loading...</b></div>
+<div id="ajax-error"><b>Error</b></div>
+
+	</div><!--/body_container-->
+
+</body>
+</html>

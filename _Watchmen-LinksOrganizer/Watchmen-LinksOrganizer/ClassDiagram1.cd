@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="префиксы:&#xD;&#xA;torrent - данные торрент-клиента&#xD;&#xA;prog - данные из программы&#xD;&#xA;Web - данные из Инета">
+    <Position X="0.639" Y="0.5" Height="0.823" Width="2.284" />
+  </Comment>
+  <Comment CommentText="Эти классы используются при получении инфы из торрент-файлов">
+    <Position X="23.75" Y="0.5" Height="0.437" Width="3.346" />
+  </Comment>
+  <Comment CommentText="Эти два используются при создании отчётов">
+    <Position X="40.334" Y="2.281" Height="0.729" Width="1.314" />
+  </Comment>
+  <Comment CommentText="Всё, что связано с ограничениями скоростей в торрент-клиенте. Пока не нужно, но на всякий случай оставлю.">
+    <Position X="23.75" Y="7.25" Height="0.989" Width="2.023" />
+  </Comment>
+  <Comment CommentText="Список функций с http-запросами:&#xD;&#xA;DownloadWebPageWithoutCookie&#xD;&#xA;ReceiveCookie&#xD;&#xA;ReceiveFile&#xD;&#xA;DownloadWebPageWithCookie&#xD;&#xA;SendStatRepChapter&#xD;&#xA;">
+    <Position X="5.562" Y="0.51" Height="1.448" Width="2.798" />
+  </Comment>
+  <Comment CommentText="Данные классы хранят идентификационные данные о пользователях доменов: торрент-трекеров и торрент-клиентов">
+    <Position X="13.915" Y="10.069" Height="0.327" Width="9.849" />
+  </Comment>
+  <Class Name="WindowsApplication1.torrentInfo">
+    <Position X="10.25" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>RkwAEICm1CIQwIguBiahAESFGICQIiIEACZAAASAJEA=</HashCode>
+      <FileName>Class_torrentInfo.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_SavedInfo">
+    <Position X="0.5" Y="1.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>hFVYRLIQ7bIAAkkHhAI+0M1FhhQgkKZAVsKnAIRdDwI=</HashCode>
+      <FileName>Class_SavedInfo.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_Subforum">
+    <Position X="14" Y="0.5" Width="4" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAQAgBAQAAAUAgABAGAsAgyBbAQAAAAAAMAIRACAhBA=</HashCode>
+      <FileName>Class_Subforum.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.44" />
+  </Class>
+  <Class Name="WindowsApplication1.Class_SubforumsList">
+    <Position X="19.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAMAAAAAAAAAAAAAAAAAAAQFAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Class_SubforumsList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_SubforumsListColl">
+    <Position X="19.5" Y="3.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class_SubforumsListColl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_ListOfInfoFromTorrentFiles">
+    <Position X="23.75" Y="1" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAABAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Class_ListOfInfoFromTorrentFiles.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_InfoFromTorrentFile">
+    <Position X="23.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAABBAIIAAAEAQAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class_InfoFromTorrentFile.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_ReportCell">
+    <Position X="38.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EIAAAQAAAAAAACAAAAAAAABAAAgAgAIAAAAhcAADAAA=</HashCode>
+      <FileName>Class_ReportCell.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_ReportLine">
+    <Position X="38.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class_ReportLine.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.WebStatusColors">
+    <Position X="34" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAABAQAAAAgAAAABAAAAAQAAAAAAAAEAAAAAgAIAAAA=</HashCode>
+      <FileName>WebStatusColors.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_ForumParser">
+    <Position X="27.5" Y="0.5" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AACIAAAIEAAAAAAAAQICAAAAAAAAAAAAAAABAAAYAAA=</HashCode>
+      <FileName>Class_ForumParser.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_rutrackerorg">
+    <Position X="27.5" Y="4.25" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAIkAEAAEAAAAICBAABAAAIAAkAACQAABAQACA=</HashCode>
+      <FileName>Class_rutrackerorg.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.TorClientSpeed">
+    <Position X="23.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TorClientSpeed.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_SavedInfoReport">
+    <Position X="5.5" Y="2.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAgACgBDAgQQQIAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Class_SavedInfoReport.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_Report">
+    <Position X="34" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAWAAEAAAAAAAAAAEAAAAAIAAAAIAAAAAAADAEAA=</HashCode>
+      <FileName>Class_Report.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.JSONelement">
+    <Position X="20.5" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAgAACgCAAAAAAAAAQBAAAEAgIAAAAABAAAIAA=</HashCode>
+      <FileName>JSONelement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_CredentialsUser">
+    <Position X="14" Y="10.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAEAAAAAQAABQAAAAAAAAACAAAIAAABAAA=</HashCode>
+      <FileName>Class_Credentials.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_CredentialsDomainsColl">
+    <Position X="14" Y="14.25" Width="10.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAQAAAAgQAAAAAEAAAAAAAACAAACACCAAA=</HashCode>
+      <FileName>Class_Credentials.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowsApplication1.Class_CredentialsUsersColl">
+    <Position X="16.5" Y="10.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAMBAAAAAAAAJAAAAAAAAAAMAAAACAAAQAAAAAAAAAI=</HashCode>
+      <FileName>Class_Credentials.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="WindowsApplication1.EnumBitmaps">
+    <Position X="36.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAEAAAAAQ=</HashCode>
+      <FileName>EnumBitmaps.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WindowsApplication1.CredsDomainsCollPropertyList">
+    <Position X="20.25" Y="11" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAIAAABAAA=</HashCode>
+      <FileName>Class_Credentials.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
