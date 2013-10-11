@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using TorrentParser.Entities;
@@ -30,6 +31,7 @@ namespace uHelper
         
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Text = "uHelper v." + Assembly.GetExecutingAssembly().GetName().Version;
             var di = new DirectoryInfo(Path);
             var file = di.GetFiles("*.torrent").OrderByDescending(x => x.Length).ToList()[2];
                 
