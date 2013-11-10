@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.Globalization;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using Newtonsoft.Json;
