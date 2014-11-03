@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -29,7 +28,7 @@ namespace uHelper.webAPI.Rutracker
 
         public RutrackerInfoProvider(ISettingsProvider settingsProvider)
         {
-            SettingsProvider = settingsProvider.CheckNull("SettingsProvider");
+            SettingsProvider = settingsProvider;
             Client = new CookiesWebClient(GetCookies, new NetworkCredential(SettingsProvider.Username, SettingsProvider.Password));
         }
 
