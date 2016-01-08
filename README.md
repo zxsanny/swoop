@@ -1,7 +1,10 @@
-uHelper
+Swoop
 =======
 
-Organizes your torrent files and synchronizes downloaded content with current state on torrent tracker
-In common case program can be applyed to any torrent trackers and to any bittorrent clients
-For now implemented realizations for rutracker.org tracker and uTorrent client.
+**Swoop** - simple torrent-tracker grabber. Program watches on updates for several popular torrent-tracker and downloads information about seeds: magnet url, seed's title, size and description. All information stored locally, so that local database can consume more than 10 Gb.
+Popular trackers that program watches:
 
+- [Rutracker](http://rutracker.org)
+- [Rutor](http://rutor.org)
+- [ThePiratesBay](https://thepiratebay.se)
+- ...
